@@ -15,11 +15,11 @@
 // Make global g_canvas JS 'object': a key-value 'dictionary'.
 var g_canvas = { cell_size:20, wid:88, hgt:50 }; // JS Global var, w canvas size info.
 var colors = {
-    "Insertion": "#AC92EB",
-    "Selection": "#6CA2EA",
-    "Poresort": "#B5D33D",
-    "Mergesort": "#FFCE54",
-    "Quicksort": "#ED5564"
+    "Insertion": "#AC92EB", // Purple
+    "Selection": "#6CA2EA", // blue
+    "Poresort": "#B5D33D",  // green
+    "Mergesort": "#FFCE54", // yellow
+    "Quicksort": "#ED5564"  // red
 };
 
 // five algs; 16 char each, 2 spaces bt algs
@@ -53,7 +53,6 @@ function retrieve_input()
     stringInput = format(stringInput); // pad or truncate string as needed
     console.log("Formatted String: " + stringInput);
 
-
     draw_pass(stringInput, 0, "all"); // draw the first iteration (inputted string) on all algs
 
     // this is just a demonstration on how to draw a pass for an alg
@@ -79,127 +78,80 @@ function format(msg)
 // Functino to draw the title of each algorithm.
 function draw_headers() 
 {
-    // Insertion Sort header
-    let title = " Insertion Sort ";
     stroke(0);
-    fill(colors.Insertion); // insertion sort purple
     textSize(17);
 
-    for (i in title)
-    {
-        text(title[i], (6+(i*20)), 16);
-    }
+    // Insertion Sort header
+    alg_header("Insertion Sort", 6, colors.Insertion);
 
     // Selection Sort header
-    title = " Selection Sort ";
-    fill(colors.Selection); // Selection sort blue
-    
-    for (i in title)
-    {
-        text(title[i], (366+(i*20)), 16);
-    }
+    alg_header("Selection Sort", 366, colors.Selection);
 
     // Gold's Poresort header
-    title = "Gold's Poresort";
-    fill(colors.Poresort); // Poresort green
-
-    for (i in title)
-    {
-        text(title[i], (723+(i*20)), 16);
-    }
+    alg_header("Gold's Poresort", 723, colors.Poresort);
 
     // Mergesort header
-    title = "Mergesort";
-    fill(colors.Mergesort); // Mergesort yellow
-
-    for (i in title)
-    {
-        text(title[i], (1083+(i*20)), 16);
-    }
+    alg_header("Mergesort", 1083, colors.Mergesort);
 
     // Quicksort header
-    title = "Quicksort";
-    fill(colors.Quicksort); // Quicksort red
-
-    for (i in title)
-    {
-        text(title[i], (1445+(i*20)), 16);
-    }
+    alg_header("Quicksort", 1445, colors.Quicksort);
 }
 
+// Function to draw 1 pass of an algorithm iteration.
 function draw_pass(msg, pass, algName)
 {
-    switch(algName) {
-        case "all":
-            fill(colors.Insertion);
-            for (i in msg)
-            {
-                text(msg[i], 6+(i*20), 36);
-            }
+    switch(algName) 
+    {
+        case "all": // draw the 0th pass for all algorithms (base string)
+            alg_pass(msg, 6, pass, "white");
 
-            fill(colors.Selection);
-            for (i in msg)
-            {
-                text(msg[i], (366+(i*20)), 36);
-            }
+            alg_pass(msg, 366, pass, "white");
 
-            fill(colors.Poresort);
-            for (i in msg)
-            {
-                text(msg[i], (723+(i*20)), 36);
-            }
+            alg_pass(msg, 723, pass, "white");
 
-            fill(colors.Mergesort);
-            for (i in msg)
-            {
-                text(msg[i], (1083+(i*20)), 36);
-            }
+            alg_pass(msg, 1083, pass, "white");
 
-            fill(colors.Quicksort);
-            for (i in msg)
-            {
-                text(msg[i], (1445+(i*20)), 36);
-            }
+            alg_pass(msg, 1445, pass, "white");
             break;
 
         case "insertion":
-            fill(colors.Insertion);
-            for (i in msg)
-            {
-                text(msg[i], 6+(i*20), 36+(pass*20));
-            }
+            alg_pass(msg, 6, pass, colors.Insertion);
             break;
 
         case "selection":
-            fill(colors.Selection);
-            for (i in msg)
-            {
-                text(msg[i], (366+(i*20)), 36+(pass*20));
-            }
+            alg_pass(msg, 366, pass, colors.Selection);
             break;
 
         case "poresort":
-            fill(colors.Poresort);
-            for (i in msg)
-            {
-                text(msg[i], (723+(i*20)), 36+(pass*20));
-            }
+            alg_pass(msg, 723, pass, colors.Poresort);
             break;
 
         case "mergesort":
-            fill(colors.Mergesort);
-            for (i in msg)
-            {
-                text(msg[i], (1083+(i*20)), 36+(pass*20));
-            }
+            alg_pass(msg, 1083, pass, colors.Mergesort);
             break;
 
         case "quicksort":
-            fill(colors.Quicksort);
-            for (i in msg)
-            {
-                text(msg[i], (1445+(i*20)), 36+(pass*20));
-            }
+            alg_pass(msg, 1445, pass, colors.Quicksort);
             break;
+    }
+}
+
+// Function to draw the header name for an algorithm
+function alg_header(algName, x_cord, color)
+{
+    fill(color);
+    for (i in algName)
+    {
+        text(algName[i], (x_cord+(i*20)), 16);
+    }
+}
+
+// Function to draw a msg, for an algorithm on a row decided by "pass".
+function alg_pass(msg, x_cord, pass, color)
+{
+    fill(color);
+    for (i in msg)
+    {
+        text(msg[i], (x_cord+(i*20)), 36+(pass*20));
     }
 }
