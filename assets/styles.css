@@ -1,7 +1,28 @@
+/* 
+
+Author Information 
+  Team Name: AntEaters
+    Clemente Solorio : clem@csu.fullerton.edu
+    Farnam Lname : email
+    Ramon Lname : email
+
+File Description
+  This file contains the styling rules and design used in the HTML file. It is loaded
+  and referenced inside of index.html to apply the styling rules to the page.
+
+*/
 body {
   text-align: center;
   font-family: sans-serif;
 }
 canvas {
   background-color: black;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.instructionList {
+  text-align: left;
 }
